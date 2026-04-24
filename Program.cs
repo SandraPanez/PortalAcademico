@@ -59,4 +59,27 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+// Crear rol Coordinador y usuario inicial
+using (var scope = app.Services.CreateScope())
+{
+    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    if (!await roleManager.RoleExistsAsync("Coordinador"))
+        await roleManager.CreateAsync(new IdentityRole("Coordinador"));
+
+    var coordinador = await userManager.FindByEmailAsync("coordinador@portal.com");
+    if (coordinador == null)
+    {
+        coordinador = new IdentityUser
+        {
+            UserName = "coordinador@portal.com",
+            Email = "coordinador@portal.com",
+            EmailConfirmed = true
+        };
+        await userManager.CreateAsync(coordinador, "Coordinador123!");
+        await userManager.AddToRoleAsync(coordinador, "Coordinador");
+    }
+}
+
 app.Run();
