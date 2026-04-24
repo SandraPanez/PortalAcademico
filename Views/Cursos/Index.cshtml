@@ -1,0 +1,63 @@
+@model IEnumerable<PortalAcademico.Models.Curso>
+
+@{
+    ViewData["Title"] = "Catálogo de Cursos";
+}
+
+<h2>Catálogo de Cursos</h2>
+
+<form method="get" asp-action="Index">
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <label>Nombre</label>
+            <input type="text" name="nombre" value="@ViewBag.Nombre" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label>Créditos mín.</label>
+            <input type="number" name="creditosMin" value="@ViewBag.CreditosMin" class="form-control" min="1" />
+        </div>
+        <div class="col-md-2">
+            <label>Créditos máx.</label>
+            <input type="number" name="creditosMax" value="@ViewBag.CreditosMax" class="form-control" min="1" />
+        </div>
+        <div class="col-md-2">
+            <label>Horario inicio</label>
+            <input type="time" name="horarioInicio" value="@ViewBag.HorarioInicio" class="form-control" />
+        </div>
+        <div class="col-md-2">
+            <label>Horario fin</label>
+            <input type="time" name="horarioFin" value="@ViewBag.HorarioFin" class="form-control" />
+        </div>
+        <div class="col-md-1 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Cupo</th>
+            <th>Horario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var curso in Model)
+        {
+            <tr>
+                <td>@curso.Codigo</td>
+                <td>@curso.Nombre</td>
+                <td>@curso.Creditos</td>
+                <td>@curso.CupoMaximo</td>
+                <td>@curso.HorarioInicio.ToString(@"hh\:mm") - @curso.HorarioFin.ToString(@"hh\:mm")</td>
+                <td>
+                    <a asp-action="Detalle" asp-route-id="@curso.Id" class="btn btn-info btn-sm">Ver detalle</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
