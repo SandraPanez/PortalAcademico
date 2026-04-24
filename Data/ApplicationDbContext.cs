@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PortalAcademico.Models;
 
 namespace PortalAcademico.Data;
 
@@ -8,5 +9,27 @@ public class ApplicationDbContext : IdentityDbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
+    }
+
+    public DbSet<Curso> Cursos { get; set; }
+    public DbSet<Matricula> Matriculas { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        builder.Entity<Curso>()
+            .HasIndex(c => c.Codigo)
+            .IsUnique();
+
+        builder.Entity<Matricula>()
+            .HasIndex(m => new { m.CursoId, m.UsuarioId })
+            .IsUnique();
+
+        builder.Entity<Curso>().HasData(
+            new Curso { Id = 1, Codigo = "MAT101", Nombre = "Matemáticas", Creditos = 4, CupoMaximo = 30, HorarioInicio = new TimeSpan(8, 0, 0), HorarioFin = new TimeSpan(10, 0, 0), Activo = true },
+            new Curso { Id = 2, Codigo = "FIS101", Nombre = "Física", Creditos = 3, CupoMaximo = 25, HorarioInicio = new TimeSpan(10, 0, 0), HorarioFin = new TimeSpan(12, 0, 0), Activo = true },
+            new Curso { Id = 3, Codigo = "PRG101", Nombre = "Programación I", Creditos = 4, CupoMaximo = 20, HorarioInicio = new TimeSpan(14, 0, 0), HorarioFin = new TimeSpan(16, 0, 0), Activo = true }
+        );
     }
 }
