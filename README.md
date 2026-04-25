@@ -1,56 +1,21 @@
 # Portal Académico
 
-Sistema web para gestión de cursos, estudiantes y matrículas universitarias.
+Sistema web para gestionar cursos y matrículas universitarias, desarrollado como examen parcial de Programación I.
 
-## Stack
+## Tecnologías
+
 - ASP.NET Core MVC (.NET 9)
 - Entity Framework Core + SQLite
 - ASP.NET Identity
-- Redis (sesiones y cache)
-- Render.com (deploy)
+- Redis (sesiones y caché)
+- Bootstrap 5
+- Deploy en Render.com
 
-## Pasos para correr localmente
+## URL del proyecto
 
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com/SandraPanez/PortalAcademico.git
-cd PortalAcademico
-```
+https://portalacademico-tdpf.onrender.com
 
-### 2. Configurar variables de entorno
-Crea un archivo `appsettings.Development.json` con:
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Data Source=app.db"
-  },
-  "Redis": {
-    "ConnectionString": "localhost:6379"
-  }
-}
-```
+## Usuario coordinador
 
-### 3. Aplicar migraciones
-```bash
-dotnet ef database update
-```
-
-### 4. Correr el proyecto
-```bash
-dotnet run
-```
-
-## Variables de entorno en Render
-| Variable | Valor |
-|----------|-------|
-| `ASPNETCORE_ENVIRONMENT` | `Production` |
-| `ASPNETCORE_URLS` | `http://0.0.0.0:${PORT}` |
-| `ConnectionStrings__DefaultConnection` | URL de tu base de datos |
-| `Redis__ConnectionString` | URL de Redis |
-
-## Usuario Coordinador por defecto
 - **Email:** coordinador@portal.com
 - **Password:** Coordinador123!
-
-## URL en Render
-(agregar URL cuando esté desplegado)
