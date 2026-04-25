@@ -1,9 +1,6 @@
-# Portal Académico
-
-Sistema web para gestionar cursos y matrículas universitarias, desarrollado como examen parcial de Programación I.
+Sistema web para gestionar cursos y matrículas universitarias.
 
 ## Tecnologías
-
 - ASP.NET Core MVC (.NET 9)
 - Entity Framework Core + SQLite
 - ASP.NET Identity
@@ -12,7 +9,6 @@ Sistema web para gestionar cursos y matrículas universitarias, desarrollado com
 - Deploy en Render.com
 
 ## URL del proyecto
-
 https://portalacademico-tdpf.onrender.com
 
 ## Usuario coordinador
